@@ -26,7 +26,10 @@ SECRET_KEY = sekret
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = debu
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'pythonproject5.fly.dev',
+    'www.pythonproject5.fly.dev',
+                  ]
 
 
 # Application definition
@@ -147,3 +150,15 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://pythonproject5.fly.dev',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'https://pythonproject5.fly.dev',
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
