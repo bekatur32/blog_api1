@@ -42,10 +42,6 @@ INSTALLED_APPS = [
     'blog',
 
     'rest_framework',
-    'rest_framework.authtoken',
-    'djoser',
-    'rest_auth',
-    'rest_auth.registration',
     'drf_yasg'
 ]
 

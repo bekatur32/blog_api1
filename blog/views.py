@@ -1,8 +1,7 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.permissions import AllowAny
 from .models import Blog, Author
-from .serializers import BlogSerializer
+from .serializers import BlogSerializer, BlogputSerializer
 from .permishions import CanCreateBlogPermission
 
 
@@ -14,7 +13,7 @@ class BlogListView(generics.ListAPIView):
 class BlogCreateView(generics.CreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
-    permission_classes = [IsAuthenticated, CanCreateBlogPermission]
+    permission_classes = [CanCreateBlogPermission]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -22,7 +21,7 @@ class BlogCreateView(generics.CreateAPIView):
 
 class BlogUpdateView(generics.UpdateAPIView):
     queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
+    serializer_class = BlogputSerializer
     permission_classes = [CanCreateBlogPermission]
 
     def perform_create(self, serializer):

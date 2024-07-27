@@ -1,6 +1,5 @@
 from django.core.exceptions import ValidationError
 import re
-from django.contrib.auth.models import User
 
 
 def validate_password_strength(value):
@@ -9,8 +8,7 @@ def validate_password_strength(value):
         '1234567', '1234567890', '123123', 'abc123', 'qwerty',
         'monkey', 'letmein', 'trustno1', 'dragon', 'baseball'
     ]
-    if ' ' in value:
-        raise ValidationError("пароль должен быть без пробелов")
+
     if len(value) < 8:
         raise ValidationError(
             ("Password must be at least 8 characters long."),
