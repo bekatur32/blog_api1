@@ -23,10 +23,12 @@ from django.urls import path, include
 from .yasg import urlpatterns as doc
 
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('users/', include('users.urls')),
-    path('blog/', include('blog.urls'))
+    path('author/', include('users.urls')),
+    path('blog/', include('blog.urls')),
+    path("sub/", include('Sub.urls'))
 ]
 urlpatterns += doc
 

@@ -1,17 +1,17 @@
 from rest_framework import serializers
-from .models import Author
+from .models import  Subscribed
 
-class AuthorSerializer(serializers.ModelSerializer):
+class SubscribedSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Author
+        model = Subscribed
         fields = ['id', 'username', 'email', 'password']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        author = Author(
+        subscribed = Subscribed(
             email=validated_data['email'],
             username=validated_data['username']
         )
-        author.set_password(validated_data['password'])
-        author.save()
-        return author
+        subscribed.set_password(validated_data['password'])
+        subscribed.save()
+        return subscribed

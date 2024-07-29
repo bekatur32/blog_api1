@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
-from config.config import sekret, debu
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,15 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = sekret
+SECRET_KEY = "django-insecure-2(un)flzy(*t$_$9yx4tfn=ovk!qf69j!hn7@mks(qo5iz(8$x"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = debu
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    'pythonproject5.fly.dev',
-    'www.pythonproject5.fly.dev',
-                  ]
+    'pythonproject5.fly.dev','*'
+]
 
 
 # Application definition
@@ -43,14 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'blog',
+    'Sub',
 
     'rest_framework',
-    'drf_yasg'
+    'drf_yasg',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -151,14 +153,38 @@ REST_FRAMEWORK = {
     ],
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://pythonproject5.fly.dev',
+
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://pythonproject5.fly.dev',
+    "http://127.0.0.1",
+    "http://0.0.0.0",
+    "http://pythonproject5.fly.dev",
+    "http://localhost:8000",
 ]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+CORS_ALLOW_ORIGINS = [
+    "http://127.0.0.1",
+    "http://0.0.0.0",
+    "http://pythonproject5.fly.dev",
+    "http://localhost:8000",
+]
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
