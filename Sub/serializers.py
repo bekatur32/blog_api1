@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import  Subscribed
+from users.serializers import AuthorSerializer
 
 class SubscribedSerializer(serializers.ModelSerializer):
     class Meta:

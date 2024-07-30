@@ -1,5 +1,5 @@
 from django.db import models
-
+from users.models import Author
 from django.contrib.auth.models import AbstractUser
 from users.validators import validate_password_strength, validate_email
 
@@ -26,3 +26,27 @@ class Subscribed(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class Subscription(models.Model):
+    subscriber = models.ForeignKey(
+        Subscribed,
+        on_delete=models.CASCADE,
+        related_name='subscriptions',
+        verbose_name='subscriber'
+    )
+    author = models.ForeignKey(
+        Author,
+        on_delete=models.CASCADE,
+        related_name='subscriptions',
+        verbose_name='author'
+    )
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('subscriber', 'author')
+        verbose_name = 'subscription'
+        verbose_name_plural = 'subscriptions'
+
+    def __str__(self):
+        return f'{self.subscriber} -> {self.author}'
