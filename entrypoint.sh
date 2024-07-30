@@ -1,10 +1,8 @@
 #!/bin/sh
 
-# Выполните миграции
 echo "Applying database migrations..."
 python manage.py migrate
 
-# Создайте суперпользователя для кастомной модели
 echo "Creating superuser..."
 python manage.py shell -c "
 from django.contrib.auth import get_user_model
@@ -20,10 +18,8 @@ if not User.objects.filter(username='${DJANGO_SUPERUSER_USERNAME}').exists():
     )
 " || true
 
-# Соберите статику
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
-# Запустите сервер
 echo "Starting server..."
 exec gunicorn --bind :8000 --workers 2 config.wsgi
